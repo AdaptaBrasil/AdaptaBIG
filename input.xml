@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:geonet="http://www.fao.org/geonetwork" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
   <gmd:fileIdentifier>
-    <gco:CharacterString>e261f2cf-dced-4851-aca7-22b5f2ceb01c</gco:CharacterString>
+    <gco:CharacterString>c6bac67f-a37b-4a8f-94a2-f1be615664e8</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
-    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="por" />
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="por"/>
   </gmd:language>
   <gmd:characterSet>
-    <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" />
+    <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode"/>
   </gmd:characterSet>
   <gmd:parentIdentifier gco:nilReason="missing">
-    <gco:CharacterString />
+    <gco:CharacterString/>
   </gmd:parentIdentifier>
   <gmd:contact>
     <gmd:CI_ResponsibleParty>
@@ -26,7 +26,7 @@
       <gmd:contactInfo>
         <gmd:CI_Contact>
           <gmd:phone>
-            <gmd:CI_Telephone />
+            <gmd:CI_Telephone/>
           </gmd:phone>
           <gmd:address>
             <gmd:CI_Address>
@@ -38,12 +38,12 @@
         </gmd:CI_Contact>
       </gmd:contactInfo>
       <gmd:role>
-        <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+        <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
       </gmd:role>
     </gmd:CI_ResponsibleParty>
   </gmd:contact>
   <gmd:dateStamp>
-    <gco:DateTime>2024-09-16T19:03:54.095845Z</gco:DateTime>
+    <gco:DateTime>2024-09-24T17:43:22</gco:DateTime>
   </gmd:dateStamp>
   <gmd:metadataStandardName>
     <gco:CharacterString>ISO 19115:2003/19139</gco:CharacterString>
@@ -67,34 +67,34 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>template Adapta</gco:CharacterString>
+            <gco:CharacterString>template data</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
               <gmd:date>
-                <gco:Date />
+                <gco:Date/>
               </gmd:date>
               <gmd:dateType>
-                <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" />
+                <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode"/>
               </gmd:dateType>
             </gmd:CI_Date>
           </gmd:date>
           <gmd:edition gco:nilReason="missing">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:edition>
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>
-        <gco:CharacterString>Resumo</gco:CharacterString>
+        <gco:CharacterString> abstract </gco:CharacterString>
       </gmd:abstract>
       <gmd:purpose gco:nilReason="missing">
-        <gco:CharacterString />
+        <gco:CharacterString/>
       </gmd:purpose>
       <gmd:credit>
-        <gco:CharacterString>Sistema de InformaÃ§Ãµes e AnÃ¡lises sobre Impactos das MudanÃ§as ClimÃ¡ticas - AdaptaBrasil MCTI.</gco:CharacterString>
+        <gco:CharacterString>Sistema de Informações e Análises sobre Impactos das Mudanças Climáticas - AdaptaBrasil MCTI.</gco:CharacterString>
       </gmd:credit>
       <gmd:status>
-        <gmd:MD_ProgressCode codeListValue="onGoing" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ProgressCode" />
+        <gmd:MD_ProgressCode codeListValue="onGoing" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ProgressCode"/>
       </gmd:status>
       <gmd:pointOfContact>
         <gmd:CI_ResponsibleParty>
@@ -102,39 +102,39 @@
             <gco:CharacterString>Pedro R Andrade</gco:CharacterString>
           </gmd:individualName>
           <gmd:organisationName>
-            <gco:CharacterString>DivisÃ£o de Impactos, AdaptaÃ§Ã£o e Vulnerabilidades - DIIAV</gco:CharacterString>
+            <gco:CharacterString>Divisão de Impactos, Adaptação e Vulnerabilidades - DIIAV</gco:CharacterString>
           </gmd:organisationName>
           <gmd:positionName gco:nilReason="missing">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:positionName>
           <gmd:contactInfo>
             <gmd:CI_Contact>
               <gmd:phone>
                 <gmd:CI_Telephone>
                   <gmd:voice gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:voice>
                   <gmd:facsimile gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:facsimile>
                 </gmd:CI_Telephone>
               </gmd:phone>
               <gmd:address>
                 <gmd:CI_Address>
                   <gmd:deliveryPoint gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:deliveryPoint>
                   <gmd:city gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:city>
                   <gmd:administrativeArea gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:administrativeArea>
                   <gmd:postalCode gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:postalCode>
                   <gmd:country gco:nilReason="missing">
-                    <gco:CharacterString />
+                    <gco:CharacterString/>
                   </gmd:country>
                   <gmd:electronicMailAddress>
                     <gco:CharacterString>pedro.andrade@inpe.br</gco:CharacterString>
@@ -144,43 +144,34 @@
             </gmd:CI_Contact>
           </gmd:contactInfo>
           <gmd:role>
-            <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+            <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
           </gmd:role>
         </gmd:CI_ResponsibleParty>
       </gmd:pointOfContact>
       <gmd:resourceMaintenance>
         <gmd:MD_MaintenanceInformation>
           <gmd:maintenanceAndUpdateFrequency>
-            <gmd:MD_MaintenanceFrequencyCode codeListValue="continual" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_MaintenanceFrequencyCode" />
+            <gmd:MD_MaintenanceFrequencyCode codeListValue="continual" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_MaintenanceFrequencyCode"/>
           </gmd:maintenanceAndUpdateFrequency>
         </gmd:MD_MaintenanceInformation>
       </gmd:resourceMaintenance>
       <gmd:graphicOverview>
         <gmd:MD_BrowseGraphic>
           <gmd:fileName>
-            <gco:CharacterString>exemplo</gco:CharacterString>
+            <gco:CharacterString>overview</gco:CharacterString>
           </gmd:fileName>
         </gmd:MD_BrowseGraphic>
       </gmd:graphicOverview>
       <gmd:descriptiveKeywords>
         <gmd:MD_Keywords>
           <gmd:keyword>
-            <gco:CharacterString>Ãndice de exposiÃ§Ã£o</gco:CharacterString>
-          </gmd:keyword>
-          <gmd:keyword>
-            <gco:CharacterString>PopulaÃ§Ã£o exposta</gco:CharacterString>
-          </gmd:keyword>
-          <gmd:keyword>
-            <gco:CharacterString>Seca</gco:CharacterString>
-          </gmd:keyword>
-          <gmd:keyword>
             <gco:CharacterString>Brasil</gco:CharacterString>
           </gmd:keyword>
           <gmd:keyword>
-            <gco:CharacterString>MunicÃ­pios</gco:CharacterString>
+            <gco:CharacterString>Municípios</gco:CharacterString>
           </gmd:keyword>
           <gmd:keyword>
-            <gco:CharacterString>MudanÃ§as ClimÃ¡ticas</gco:CharacterString>
+            <gco:CharacterString>Mudanças Climáticas</gco:CharacterString>
           </gmd:keyword>
           <gmd:keyword>
             <gco:CharacterString>DIIAV</gco:CharacterString>
@@ -193,17 +184,17 @@
       <gmd:descriptiveKeywords>
         <gmd:MD_Keywords>
           <gmd:keyword gco:nilReason="missing">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:keyword>
         </gmd:MD_Keywords>
       </gmd:descriptiveKeywords>
       <gmd:resourceConstraints>
         <gmd:MD_LegalConstraints>
           <gmd:accessConstraints>
-            <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" />
+            <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"/>
           </gmd:accessConstraints>
           <gmd:useConstraints>
-            <gmd:MD_RestrictionCode codeListValue="otherRestictions" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" />
+            <gmd:MD_RestrictionCode codeListValue="otherRestictions" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"/>
           </gmd:useConstraints>
           <gmd:otherConstraints>
             <gco:CharacterString>Creative Commons Attribution</gco:CharacterString>
@@ -211,13 +202,13 @@
         </gmd:MD_LegalConstraints>
       </gmd:resourceConstraints>
       <gmd:spatialRepresentationType>
-        <gmd:MD_SpatialRepresentationTypeCode codeListValue="vector" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" />
+        <gmd:MD_SpatialRepresentationTypeCode codeListValue="vector" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_SpatialRepresentationTypeCode"/>
       </gmd:spatialRepresentationType>
       <gmd:language>
         <gco:CharacterString>por</gco:CharacterString>
       </gmd:language>
       <gmd:characterSet>
-        <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" />
+        <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode"/>
       </gmd:characterSet>
       <gmd:topicCategory>
         <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
@@ -240,11 +231,11 @@
               </gmd:northBoundLatitude>
             </gmd:EX_GeographicBoundingBox>
           </gmd:geographicElement>
-          <gmd:temporalElement />
+          <gmd:temporalElement/>
         </gmd:EX_Extent>
       </gmd:extent>
       <gmd:supplementalInformation gco:nilReason="missing">
-        <gco:CharacterString />
+        <gco:CharacterString/>
       </gmd:supplementalInformation>
     </gmd:MD_DataIdentification>
   </gmd:identificationInfo>
@@ -256,7 +247,7 @@
             <gco:CharacterString>GeoJSON</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -266,7 +257,7 @@
             <gco:CharacterString>KMZ</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -276,7 +267,7 @@
             <gco:CharacterString>JSON</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -286,7 +277,7 @@
             <gco:CharacterString>Shapefile</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -296,7 +287,7 @@
             <gco:CharacterString>XLSX</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -306,7 +297,7 @@
             <gco:CharacterString>CSV</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -316,7 +307,7 @@
             <gco:CharacterString>PNG</gco:CharacterString>
           </gmd:name>
           <gmd:version gco:nilReason="unknown">
-            <gco:CharacterString />
+            <gco:CharacterString/>
           </gmd:version>
         </gmd:MD_Format>
       </gmd:distributionFormat>
@@ -325,7 +316,7 @@
           <gmd:onLine>
             <gmd:CI_OnlineResource>
               <gmd:linkage>
-                <gmd:URL>https://sistema.adaptabrasil.mcti.gov.br</gmd:URL>
+                <gmd:URL> URL 1 </gmd:URL>
               </gmd:linkage>
               <gmd:protocol>
                 <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
@@ -334,7 +325,36 @@
                 <gco:CharacterString>AdaptaBrasil</gco:CharacterString>
               </gmd:name>
               <gmd:description>
-                <gco:CharacterString>PopulaÃ§Ã£o exposta (Seca)</gco:CharacterString>
+                <gco:CharacterString> Teste </gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL> URL 2 </gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--download</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Download do arquivo SHP dos dados</gco:CharacterString>
+              </gmd:name>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL> URL 3 </gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-2.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>teste</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>teste</gco:CharacterString>
               </gmd:description>
             </gmd:CI_OnlineResource>
           </gmd:onLine>
@@ -347,15 +367,15 @@
       <gmd:scope>
         <gmd:DQ_Scope>
           <gmd:level>
-            <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode" />
+            <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode"/>
           </gmd:level>
-          <gmd:extent />
+          <gmd:extent/>
         </gmd:DQ_Scope>
       </gmd:scope>
       <gmd:lineage>
         <gmd:LI_Lineage>
           <gmd:statement>
-            <gco:CharacterString>AtualizaÃ§Ã£o frequente dos dados</gco:CharacterString>
+            <gco:CharacterString>Atualização frequente dos dados</gco:CharacterString>
           </gmd:statement>
         </gmd:LI_Lineage>
       </gmd:lineage>
