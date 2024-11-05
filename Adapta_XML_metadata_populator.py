@@ -49,6 +49,40 @@ def get_location_url(api_url):
 def remover_quebras(complete_description):      
     return complete_description.replace("<br>", " ")
 
+# Carrega todos os indicadores da API
+# Cria um dicionário para acessar rapidamente pelo ID
+# Inicializa a lista para armazenar os títulos dos níveis 1 e 2
+# Percorre a hierarquia até o nível 1 ou 2
+# Adiciona o título se estamos no nível 1 ou 2 e ele ainda não está na lista
+# Passa ao próximo nível com o `indicator_id_master`
+# Retorna o título completo com "AdaptaBrasil" no início
+def get_hierarchy_titles(url, indicator_id):
+    
+    with urllib.request.urlopen(url) as response:
+        indicadores = json.load(response)
+    
+    indicadores_dict = {ind['id']: ind for ind in indicadores}
+
+    titles = []
+    current_id = indicator_id
+    
+    while current_id:
+        indicador = indicadores_dict.get(current_id)
+        if indicador is None:
+            break
+                
+        if indicador['level'] <= 2 and indicador['title'] not in titles:
+            titles.insert(0, indicador['title'])
+        
+        current_id = int(indicador['indicator_id_master']) if indicador.get('indicator_id_master') else None
+
+    # Obtém o título do indicador original
+    original_indicator = indicadores_dict.get(indicator_id)
+    if original_indicator and original_indicator['title'] not in titles:
+        titles.append(original_indicator['title'])
+
+    return f"AdaptaBrasil: {' - '.join(titles)}"
+
 def getScenarios(dict_scenarios: dict)->str:
     scenarios = ''
     for scenario in dict_scenarios:
@@ -67,7 +101,7 @@ def update_xml_indicator_with_data(xml_template, indicador: list, years: list):
     # Adicionando valor para o "Título"
     title = root.find('.//gmd:title/gco:CharacterString', namespaces)
     if title is not None:
-        title.text = indicador.get('title', '')
+        title.text = get_hierarchy_titles(url_hierarchy, indicador['id'])
 
     # Adicionando valor para "Resumo"
     abstract = root.find('.//gmd:abstract/gco:CharacterString', namespaces)
