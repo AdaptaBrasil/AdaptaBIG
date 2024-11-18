@@ -98,6 +98,11 @@ def update_xml_indicator_with_data(xml_template, indicador: list, years: list):
     if file_identifier_elem is not None:
         file_identifier_elem.text = f"{schema}{indicador['id']}"
 
+    # Adicionando identificador de parente 
+    file_identifier_elem = root.find('.//gmd:parentIdentifier/gco:CharacterString', namespaces)
+    if file_identifier_elem is not None:
+        file_identifier_elem.text = f"{schema}{indicador['indicator_id_master']}"
+
     # Adicionando valor para o "Título"
     title = root.find('.//gmd:title/gco:CharacterString', namespaces)
     if title is not None:
