@@ -83,6 +83,31 @@ def get_hierarchy_titles(url, indicator_id):
 
     return f"AdaptaBrasil: {' - '.join(titles)}"
 
+# Carrega todos os indicadores da API
+# Cria um dicionário para acesso rápido por ID
+# Busca na hierarquia
+# Se encontrar o nível 1, retorna o campo "imageurl"
+# Atualiza para o próximo nível na hierarquia
+# Retorna None se não encontrar o nível 1 ou o campo "imageurl"
+def get_overview_url(url, indicator_id):
+    
+    with urllib.request.urlopen(url) as response:
+        indicadores = json.load(response)
+    
+    indicadores_dict = {ind['id']: ind for ind in indicadores}
+  
+    current_id = indicator_id
+    while current_id:
+        indicador = indicadores_dict.get(current_id)        
+        if indicador is None:
+            break        
+        if indicador['level'] == 1:
+            return indicador.get('imageurl', None)
+            
+        current_id = int(indicador.get('indicator_id_master', 0)) if indicador.get('indicator_id_master') else None
+
+    return None 
+
 def getScenarios(dict_scenarios: dict)->str:
     scenarios = ''
     for scenario in dict_scenarios:
@@ -119,7 +144,7 @@ def update_xml_indicator_with_data(xml_template, indicador: list, years: list):
     # Adicionando valor para "Overview (URL da imagem)"
     overview = root.find('.//gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString', namespaces)
     if overview is not None:
-        overview.text = url_show_map_on_the_site
+        overview.text = get_overview_url(url_hierarchy, indicador['id'])
 
     # Adicionando valor para "Palavras-chave"
     """keywords = root.findall('.//gmd:keyword/gco:CharacterString', namespaces)
@@ -152,10 +177,13 @@ def update_xml_indicator_with_data(xml_template, indicador: list, years: list):
         elif protocol is not None and protocol.text == 'WWW:LINK-2.0-http--link':
             linkage = resource.find('.//gmd:linkage/gmd:URL', namespaces)
             if linkage is not None:                
-                linkage.text = f'{url_base}/api/mapa-dados/BR/municipio/{indicador["id"]}/2015/null'
+                linkage.text = f'{url_base}/api/mapa-dados/BR/municipio/{indicador["id"]}/2015/null/adaptabrasil'
             name = resource.find('.//gmd:name/gco:CharacterString', namespaces)
             if name is not None:
-                name.text = 'Exibe a tela de um determinado indicador' 
+                name.text = 'Exibir a tela de um determinado indicador'
+            description = resource.find('.//gmd:description/gco:CharacterString', namespaces)
+            if description is not None:
+                description.text = 'Obtem os dados de um indicador associados a um recorte e uma resolução.'
         
     return tree
 
