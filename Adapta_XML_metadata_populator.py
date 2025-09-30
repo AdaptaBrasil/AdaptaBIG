@@ -21,19 +21,32 @@ for prefix, uri in namespaces.items():
     ET.register_namespace(prefix, uri)
 
 
-# Realiza uma requisição HTTP para a URL fornecida e retorna o valor do campo 'location' da resposta JSON.
-# Parâmetros: api_url (str): URL da API a ser consultada.
-# Retorna: str: Valor do campo 'location' se presente na resposta; caso contrário, retorna string vazia.
+# Faz uma requisição HTTP para a URL fornecida e tenta extrair o link de download a partir da chave 'location' no JSON de resposta.
+# A API pode retornar dois formatos de resposta:
+#  - dicionário: {"location": "https://..."}
+#  - lista de dicionários: [{"location": "https://..."}, ...]
+# Parâmetros:api_url (str): URL da API a ser consultada.
+# Retorna: str: URL do arquivo encontrada em 'location'. Caso não seja possível acessar ou o campo não exista, retorna string vazia.
 def get_location_url(api_url):
     try:
         with urllib.request.urlopen(api_url) as response:
             if response.status == 200:
                 json_response = json.loads(response.read().decode())
-                return json_response.get('location', '')
-    except Exception:
+
+                file_url = ''
+                if isinstance(json_response, dict):  # caso normal
+                    file_url = json_response.get('location', '')
+                elif isinstance(json_response, list) and len(json_response) > 0:  # caso lista
+                    file_url = json_response[0].get('location', '')
+
+                file_url = file_url.strip() if file_url else ''
+                print(f" {api_url} -> {file_url}")
+                return file_url
+    except Exception as e:
+        print(f" Erro ao acessar {api_url}: {e}")
         return ''
     return ''
-
+    
 
 # Remove quebras de linha em HTML (tags <br>) substituindo por espaço simples.
 # Parâmetros: texto (str): Texto de entrada com possíveis tags <br>.
@@ -98,14 +111,19 @@ def get_resolution_from_level1(indicadores_dict, indicador):
     return resolucao_default
 
 
-# Extrai e organiza as informações de um indicador do AdaptaBrasil para preenchimento de um metadado XML.
-# Gera campos como título hierárquico, resumo, links para página do indicador e downloads SHP. 
-# A resolução espacial é determinada a partir do nível 1 do indicador.
-# Parâmetros: indicador (dict): Dicionário com os dados do indicador.
-# Retorna: dict: Dicionário contendo os metadados organizados.
+# Extrai e organiza as informações de um indicador da API do AdaptaBrasil para alimentar o template de metadados XML.
+# O processamento inclui:
+#   - Determinação dos anos disponíveis (presentes e futuros);
+#   - Identificação da resolução a partir do nível hierárquico;
+#   - Criação do link para a página do indicador na plataforma;
+#   - Coleta de links de download (SHP) para anos presentes;
+#   - Coleta de links de download (SHP) para cenários futuros (ex.: SWL1.5, SWL2.0).
+# Parâmetros: indicador (dict): Estrutura JSON de um indicador da API.
+# Retorna: dict: Estrutura contendo os campos necessários para preenchimento do XML,incluindo identificadores, título, resumo, overview, e a lista de links(página do indicador + downloads).
 def extrair_dados_para_xml(indicador):
     indicadores_dict = {ind['id']: ind for ind in hierarchy}
 
+    # ---- Anos ----
     anos_raw = indicador.get('years')
     if not anos_raw:
         anos = ['0']  # usar '0' como padrão, ano presente
@@ -120,8 +138,10 @@ def extrair_dados_para_xml(indicador):
     anos_presente = [a for a in anos if int(a) < ano_atual or a == '0']
     ano_presente = max(anos_presente or ['0'], key=int)
 
+    # ---- Resolução ----
     resolucao = get_resolution_from_level1(indicadores_dict, indicador)
 
+    # ---- Página do indicador ----
     if indicador['level'] > 1:
         link_pagina = f"{url_base}/{indicador['id']}/1/{ano_presente}/null/{recorte}/{resolucao}/"
     else:
@@ -138,13 +158,15 @@ def extrair_dados_para_xml(indicador):
         "link_pagina_indicador": link_pagina
     }
 
-    # Sempre inclui o link da plataforma (item 4)
+    # ---- Link da página do indicador ----
     dados["link_dados_api"].append({
         "url": dados["link_pagina_indicador"],
         "protocol": "WWW:LINK-PLATAFORMA.0-http--link",
         "name": "Página do indicador na plataforma AdaptaBrasil",
         "description": "Informações descritivas e estruturais sobre o indicador na plataforma"
     })
+    
+
 
     # Link do visualizador só para ano presente (0) e se houver dados (RETIRADO)
     """ano_presente_str = str(ano_presente)
@@ -161,12 +183,14 @@ def extrair_dados_para_xml(indicador):
     except:
         print(f"⚠️ Visualização indisponível para o ano presente ({ano_presente_str}) - {indicador['id']}")"""
 
-    # Links de download para anos presentes (inclui ano 0)
+    
+
+    # ---- Downloads para anos presentes ----
     i = 1
     for ano in anos_presente:
         url_api = f'{url_base}/api/geometria/data/{indicador["id"]}/{recorte}/null/{ano}/{resolucao}/SHPz/adaptabrasil'
         download_url = get_location_url(url_api)
-        if download_url.startswith('http'):
+        if download_url and download_url.lower().startswith('http'):
             nome_ano = "ano presente" if ano == '0' else ano
             print(f"✔️ Ano presente encontrado: {ano} - {indicador['id']}")
             dados["link_dados_api"].append({
@@ -179,28 +203,37 @@ def extrair_dados_para_xml(indicador):
         else:
             print(f"❌ Nenhum dado encontrado para {ano} - {indicador['id']}")
 
-    # Downloads para anos futuros (exclui 2030 e 2050 dos visualizadores, mas mantém downloads)
-    cenarios_raw = indicador.get('scenarios') or []
-    cenarios_futuros = [c['value'] for c in cenarios_raw if 'value' in c]
-    cenarios_dict = {1: 'otimista', 2: 'pessimista'}
-
+   # ---- Busca cenários no nível 1 ----
+    cenarios_raw = []
+    current_id = indicador['id']
+    while current_id:
+        ind = indicadores_dict.get(current_id)
+        if ind and ind['level'] == 1:
+            cenarios_raw = ind.get('scenarios') or []
+            break
+        current_id = int(ind.get('indicator_id_master', 0)) if ind and ind.get('indicator_id_master') else None
+    
+    # Cenários futuros encontrados
     for ano in anos_futuros:
-        for cenario in cenarios_futuros:
-            url_api = f'{url_base}/api/geometria/data/{indicador["id"]}/{recorte}/{cenario}/{ano}/{resolucao}/SHPz/adaptabrasil'
+        for c in cenarios_raw:
+            cenario_label = c.get('label', f"cenario-{c.get('value')}")
+            cenario_value = c.get('value')  # <- aqui deve ser o value!
+            
+            url_api = f'{url_base}/api/geometria/data/{indicador["id"]}/{recorte}/{cenario_value}/{ano}/{resolucao}/SHPz/adaptabrasil'
             download_url = get_location_url(url_api)
-            if download_url.startswith('http'):
-                print(f"✔️ Cenário futuro encontrado: {ano} - {cenario} - {indicador['id']}")
-                nome_cenario = cenarios_dict.get(cenario, f"cenário {cenario}")
+    
+            if download_url and download_url.lower().startswith('http'):
+                print(f"✔️ Cenário futuro encontrado: {ano} - {cenario_label} ({cenario_value}) - {indicador['id']}")
                 dados["link_dados_api"].append({
                     "url": download_url,
                     "protocol": f"WWW:DOWNLOAD-{i}.0-http--download",
-                    "name": f"Download SHP - {recorte}, ano {ano}, resolução {resolucao}, cenário {nome_cenario}",
-                    "description": f"Shapefile dos dados para {recorte}, {ano}, {resolucao}, cenário {nome_cenario}"
+                    "name": f"Download SHP - {recorte}, ano {ano}, resolução {resolucao}, cenário {cenario_label}",
+                    "description": f"Shapefile dos dados para {recorte}, {ano}, {resolucao}, cenário {cenario_label}"
                 })
                 i += 1
             else:
-                print(f"❌ Nenhum dado encontrado para {ano} - {cenario} - {indicador['id']}")
-
+                print(f"❌ Nenhum dado encontrado para {ano} - {cenario_label} ({cenario_value}) - {indicador['id']}")
+    
     return dados
 
 
@@ -275,14 +308,12 @@ def preencher_template_com_dados(xml_template, dados):
 
 
 if __name__ == '__main__':
-    # Caminho do template ISO 19115/19139
     with open('input.xml', 'r', encoding='utf-8') as file:
         xml_template = file.read()
 
     with urllib.request.urlopen(url_hierarchy) as url:
         indicadores = json.load(url)
-        
-    # Caminho do diretório de saída
+
     output_dir = 'output_xml_files'
     os.makedirs(output_dir, exist_ok=True)
 
